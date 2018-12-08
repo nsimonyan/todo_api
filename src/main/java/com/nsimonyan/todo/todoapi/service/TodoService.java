@@ -44,8 +44,8 @@ public class TodoService {
        if(id !=null){
            Optional<Todo> todoFromDb = todoRepository.findById(id);
             if(todoFromDb.isPresent()) {
-                if(todo.isDone() != null)todoFromDb.get().setDone(todo.isDone());
-                if(todo.getName() != null)todoFromDb.get().setName(todo.getName());
+                todoFromDb.get().setDone(todo.isDone());
+                todoFromDb.get().setName(todo.getName());
             }
        }
         saveTodo(todo);
@@ -54,8 +54,8 @@ public class TodoService {
     public void updateTodo(Todo todo, Integer id){
         Optional<Todo> todoFromDb = todoRepository.findById(id);
         if(todoFromDb.get() != null) {
-            todoFromDb.get().setDone(todo.isDone());
-            todoFromDb.get().setName(todo.getName());
+            if(todo.isDone() != null)todoFromDb.get().setDone(todo.isDone());
+            if(todo.getName() != null)todoFromDb.get().setName(todo.getName());
             saveTodo(todo);
         }
     }
